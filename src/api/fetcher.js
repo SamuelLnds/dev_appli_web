@@ -8,12 +8,9 @@ function needsCsrf(method) {
 
 export async function fetchData(endpoint, options = {}) {
   const method = options.method || 'GET'
-  console.log(`La méthode de la requête est : ${method}`)
-  console.log(`L'URL de l'API est : ${API_URL}${endpoint}`)
 
   // Appeler csrf-cookie si nécessaire, donc pas pour les requêtes GET
   if (needsCsrf(method)) {
-    console.log('Appel de csrf-cookie')
     await fetch(`${API_URL.replace('/api', '')}/sanctum/csrf-cookie`, {
       credentials: 'include',
     })
@@ -26,8 +23,6 @@ export async function fetchData(endpoint, options = {}) {
   }
 
   const xsrfToken = getXsrfToken()
-
-  console.log("Appel de l'API avec les options suivantes :", options)
 
   const res = await fetch(`${API_URL}${endpoint}`, {
     ...options,
