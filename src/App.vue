@@ -26,13 +26,18 @@ export default {
 
 <template>
   <div
-    class="min-h-screen bg-[var(--color-background)] text-[color:var(--color-text)] transition-colors"
+    class="min-h-screen flex flex-col bg-[var(--color-background)] text-[color:var(--color-text)] transition-colors"
   >
     <!-- Header -->
     <AppHeader />
 
     <!-- Main content -->
-    <main class="p-6 max-w-4xl mx-auto">
+    <main
+      :class="[
+        'flex-1 p-6 max-w-4xl mx-auto w-full',
+        $route.name === 'login' ? 'flex flex-col justify-center' : '',
+      ]"
+    >
       <RouterView />
     </main>
   </div>

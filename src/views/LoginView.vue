@@ -41,8 +41,8 @@ export default {
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-background px-4">
-    <div class="w-full max-w-md bg-container shadow-md rounded-lg p-6 space-y-4">
+  <div class="h-full flex items-center justify-center bg-background px-4">
+    <div class="w-full max-w-md bg-container rounded-lg p-6">
       <h1 class="text-2xl font-semibold text-center text-text-heading">Connexion</h1>
 
       <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
@@ -52,7 +52,7 @@ export default {
             v-model="name"
             type="text"
             id="name"
-            class="mt-1 w-full px-3 py-2 border rounded-md text-sm bg-surface text-text border-border"
+            class="w-full px-3 py-2 border rounded-md text-sm bg-surface text-text border-border"
             :class="{ 'border-error': nameError }"
           />
           <p v-if="nameError" class="text-error text-xs mt-1">Champ requis</p>
@@ -72,7 +72,7 @@ export default {
 
         <button
           type="submit"
-          class="w-full py-2 rounded-md text-white bg-primary hover:bg-primary-hover disabled:opacity-50 transition"
+          class="w-full py-2 rounded-md bg-primary hover:bg-primary-hover disabled:opacity-50 transition"
           :disabled="loading"
         >
           {{ loading ? 'Connexion en cours...' : 'Se connecter' }}
@@ -83,3 +83,17 @@ export default {
     </div>
   </div>
 </template>
+
+<style scoped>
+h1 {
+  margin-bottom: 2rem;
+}
+
+p.text-error {
+  color: var(--color-error);
+}
+
+input {
+  margin-block: 0.5rem 0.25rem;
+}
+</style>
