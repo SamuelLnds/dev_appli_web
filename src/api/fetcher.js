@@ -1,21 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL
 
-// Détermine si la requête a besoin d'un CSRF token, donc si elle n'est pas de type GET
-// Permet de ne pas appeler csrf-cookie pour les requêtes GET
-function needsCsrf(method) {
-  return ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method?.toUpperCase())
-}
-
 export async function fetchData(endpoint, options = {}) {
-  const method = options.method || 'GET'
-
-  // Appeler csrf-cookie si nécessaire, donc pas pour les requêtes GET
-  if (needsCsrf(method)) {
-    await fetch(`${API_URL.replace('/api', '')}/sanctum/csrf-cookie`, {
-      credentials: 'include',
-    })
-  }
-
   // Récupère le token CSRF depuis le cookie
   const getXsrfToken = () => {
     const match = document.cookie.match(/XSRF-TOKEN=([^;]+)/)
